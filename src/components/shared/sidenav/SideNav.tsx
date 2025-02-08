@@ -1,6 +1,6 @@
 const SideNav = () => {
   return (
-    <div>SideNav</div>
+    <div className="p-2">SideNav</div>
   )
 }
 
