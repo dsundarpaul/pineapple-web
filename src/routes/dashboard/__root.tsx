@@ -1,15 +1,28 @@
-import { createFileRoute } from '@tanstack/react-router'
 import SideNav from '@/components/shared/sidenav/SideNav'
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
-import { useAuth } from '@clerk/clerk-react'
-import AuthOptions from '@/components/shared/AuthOptions/AuthOptions'
+import { SignedIn, SignedOut, SignInButton, useAuth, UserButton } from '@clerk/clerk-react'
+import { createRootRoute, Outlet } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/dashboard/')({
-  component: Dashboard,
+export const Route = createRootRoute({
+  component: RouteComponent,
 })
 
-function Dashboard() {
+function RouteComponent() {
+  
   const { isSignedIn } = useAuth()
+
+  const renderAuthOption = () => (
+    <div className='flex space-x-4'>
+      <SignedIn>
+        <p>You are signed in</p>
+        <UserButton />
+      </SignedIn>
+      <SignedOut>
+        <p>You are signed out</p>
+        <SignInButton />
+      </SignedOut>
+    </div>
+  )
 
   return (
     <SidebarProvider>
@@ -21,8 +34,9 @@ function Dashboard() {
               { isSignedIn && <SidebarTrigger className="-ml-1" />}
               <div className='text-lg'>Pineapple AI 🍍</div>
             </div>
-            <AuthOptions />
+            {renderAuthOption()}
           </div>
+          <Outlet />
         </div>
       </SidebarInset>
     </SidebarProvider>
