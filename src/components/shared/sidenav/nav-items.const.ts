@@ -36,6 +36,10 @@ export const NAV_ITEMS = {
   ],
   navMain: [
     {
+      title: 'Dashboard',
+      url: '/dashboard'
+    },
+    {
       title: "Event Analyzer",
       url: "/event-analyzer",
       icon: SquareTerminal,
@@ -120,6 +124,16 @@ export const NAV_ITEMS = {
         },
       ],
     },
+    {
+      title: 'Auth',
+      url: '#',
+      icon: Settings2,
+      items: [
+        { title: 'sign in', url: '#' },
+        { title: 'sign up', url: '#' },
+        { title: 'product reg', url: '/product-registration' },
+      ]
+    }
   ],
   projects: [
     {

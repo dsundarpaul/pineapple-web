@@ -5,7 +5,10 @@ import { NumberTicker } from '@/components/ui/number-ticker'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts'
-import { AttendeeTable } from './-components/AttendeeTable'
+// import { AttendeeTable } from './-components/AttendeeTable'
+import { hasPermission } from '@/utils/permissions/rbac'
+import { EventTable } from './-components/EventTable/EventTable'
+import { VIEW_MODE } from '@/utils/constants'
 
 export const Route = createFileRoute('/event-analyzer/')({
   component: EventAnalyzer,
@@ -53,63 +56,65 @@ function EventAnalyzer() {
 
       <div className='flex justify-between items-center'>
         <h1 className='text-2xl font-bold'>Event Analyzer</h1>
-        <Link to={'/event-analyzer/addedit/$eventId'} params={{ eventId: 'new' }}>
-          <Button className='font-semibold'>Add Event</Button>
-        </Link>
+        {hasPermission({roles: ['admin'], id: '1', blockedBy: []}, "eventAnalyzer", "create") && (
+          <Link to={'/event-analyzer/addedit/$eventId'} params={{ eventId: 'new' }}>
+            <Button className='font-semibold'>Add Event</Button>
+          </Link>
+        )}
       </div>
       <div className='py-3'>
-        <div className='flex w-full justify-evenly gap-3'>
+        <div className='flex w-full justify-evenly gap-0 flex-wrap'>
           {Object.entries(MOCK_STATS).map(([key, value]) => (
-            <div key={key} className='p-4 rounded-lg dark:bg-gray-800 dark:text-white flex flex-col items-center w-full border-slate-200 border shadow-sm'>
+            <div key={key} className='p-4 rounded-lg dark:bg-gray-800 dark:text-white flex flex-col items-center w-1/3 max-md:w-1/2 max-sm:w-full border-slate-300 border shadow-lg'>
               <h2 className='text-lg font-bold'>{key}</h2>
               <NumberTicker
                 value={value}
                 className="whitespace-pre-wrap text-8xl font-medium tracking-tighter text-black dark:text-white"
-                />
+              />
             </div>
           ))}
         </div>
       </div>
       
-      <div className='flex gap-3'>
-      <Card className='w-full'>
-        <CardHeader>
-          <div className='flex justify-between items-center'>
-            <CardTitle>City wise event registration - attendee ratio</CardTitle>
-            <Select>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="City" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="light">Pune</SelectItem>
-                <SelectItem value="dark">Hyderabad</SelectItem>
-                <SelectItem value="system">System</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <ChartContainer config={chartConfig} className="max-h-[400px] w-full">
-            <BarChart accessibilityLayer data={chartData}>
-              <CartesianGrid vertical={false} />
-              <ChartTooltip content={<ChartTooltipContent />} />
-              <XAxis
-                dataKey="month"
-                tickLine={false}
-                tickMargin={10}
-                axisLine={false}
-                tickFormatter={(value) => value.slice(0, 3)}
-              />
-              <Bar dataKey="registered" fill="var(--color-registered)" radius={4} />
-              <Bar dataKey="attended" fill="var(--color-attended)" radius={4} />
-            </BarChart>
-          </ChartContainer>
-        </CardContent>
-      </Card>
+      <div className='flex gap-3 max-lg:flex-col'>
+        <Card className='w-full'>
+          <CardHeader>
+            <div className='flex justify-between items-center'>
+              <CardTitle>City wise event registration - attendee ratio</CardTitle>
+              <Select>
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="City" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="light">Pune</SelectItem>
+                  <SelectItem value="dark">Hyderabad</SelectItem>
+                  <SelectItem value="system">System</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <ChartContainer config={chartConfig} className="max-h-[400px] w-full">
+              <BarChart accessibilityLayer data={chartData}>
+                <CartesianGrid vertical={false} />
+                <ChartTooltip content={<ChartTooltipContent />} />
+                <XAxis
+                  dataKey="month"
+                  tickLine={false}
+                  tickMargin={10}
+                  axisLine={false}
+                  tickFormatter={(value) => value.slice(0, 3)}
+                />
+                <Bar dataKey="registered" fill="var(--color-registered)" radius={4} />
+                <Bar dataKey="attended" fill="var(--color-attended)" radius={4} />
+              </BarChart>
+            </ChartContainer>
+          </CardContent>
+        </Card>
 
-      <Card className='w-full p-3'>
-        <AttendeeTable />
-      </Card>
+        <Card className='w-full p-3'>
+          <EventTable viewMode={VIEW_MODE.COMPACT} />
+        </Card>
       </div>
     
     </div>
