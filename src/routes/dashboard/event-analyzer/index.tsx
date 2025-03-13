@@ -10,18 +10,42 @@ import { hasPermission } from '@/utils/permissions/rbac'
 import { EventTable } from './-components/EventTable/EventTable'
 import { VIEW_MODE } from '@/utils/constants'
 
-export const Route = createFileRoute('/event-analyzer/')({
+export const Route = createFileRoute('/dashboard/event-analyzer/')({
   component: EventAnalyzer,
 })
 
-const MOCK_STATS = {
-  totalEvents: 1000,
-  totalUniqueAttendeeance: 500,
-  locations: 5,
-  liveFroms: 5,
-  livemeetups: 5,
-  totalResponses: 400
-}
+const MOCK_STATS = [
+  {
+    totalEvents: 1000,
+    value: 1000,
+    label: 'Total Events'
+  },
+  {
+    totalUniqueAttendeeance: 500,
+    value: 500,
+    label: 'Total Unique Attendeeance'
+  },
+  {
+    locations: 5,
+    value: 5,
+    label: 'Locations'
+  },
+  {
+    liveFroms: 5,
+    value: 5,
+    label: 'Live Froms'
+  },
+  {
+    livemeetups: 5,
+    value: 5,
+    label: 'Live Events'
+  },
+  {
+    totalResponses: 400,
+    value: 400,
+    label: 'Total Responses'
+  }
+]
 
 const chartData = [
   { month: "January", registered: 286, attended: 80 },
@@ -38,16 +62,16 @@ const chartData = [
   { month: "December", registered: 100, attended: 50 },
 ];
 
-  const chartConfig = {
-    registered: {
-      label: "Registered",
-      color: "hsl(var(--primary))",
-    },
-    attended: {
-      label: "Attended",
-      color: "hsl(var(--chart-2))",
-    },
-  } satisfies ChartConfig
+const chartConfig = {
+  registered: {
+    label: "Registered",
+    color: "hsl(var(--primary))",
+  },
+  attended: {
+    label: "Attended",
+    color: "hsl(var(--chart-2))",
+  },
+} satisfies ChartConfig
 
 function EventAnalyzer() {
   return (
@@ -57,20 +81,21 @@ function EventAnalyzer() {
       <div className='flex justify-between items-center'>
         <h1 className='text-2xl font-bold'>Event Analyzer</h1>
         {hasPermission({roles: ['admin'], id: '1', blockedBy: []}, "eventAnalyzer", "create") && (
-          <Link to={'/event-analyzer/addedit/$eventId'} params={{ eventId: 'new' }}>
+          <Link to={'/dashboard/event-analyzer/addedit/$eventId'} params={{ eventId: 'new' }}>
             <Button className='font-semibold'>Add Event</Button>
           </Link>
         )}
       </div>
       <div className='py-3'>
         <div className='flex w-full justify-evenly gap-0 flex-wrap'>
-          {Object.entries(MOCK_STATS).map(([key, value]) => (
-            <div key={key} className='p-4 rounded-lg dark:bg-gray-800 dark:text-white flex flex-col items-center w-1/3 max-md:w-1/2 max-sm:w-full border-slate-300 border shadow-lg'>
-              <h2 className='text-lg font-bold'>{key}</h2>
+          {MOCK_STATS.map((item, idx) => (
+            <div key={idx} className='dark:bg-gray-800 dark:text-white p-4 rounded flex flex-col w-1/3 max-md:w-1/2 max-sm:w-full border-slate-300 border shadow-lg'>
+              <h2 className='text-lg font-bold'>{item.label}</h2>
               <NumberTicker
-                value={value}
-                className="whitespace-pre-wrap text-8xl font-medium tracking-tighter text-black dark:text-white"
+                value={item.value}
+                className="whitespace-pre-wrap text-4xl font-medium tracking-tighter text-black dark:text-white"
               />
+              <p>x% from last month</p>
             </div>
           ))}
         </div>

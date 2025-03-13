@@ -7,7 +7,7 @@ export const Route = createFileRoute('/')({
 
 function HomeComponent() {
   return (
-    <div>
+    <div className='p-4'>
       <div className='flex w-full justify-between items-center'>
         <div className='flex'>
           <div className='text-lg'>Pineapple AI 🍍</div>
@@ -15,7 +15,7 @@ function HomeComponent() {
         <AuthOptions inLanginPage />
       </div>
       <div className='w-full flex flex-col justify-center items-center'>
-        <h1>Creat a landing page here</h1>
+        <h1>This is landing page. Deal with it.</h1>
         <h1 className='text-[25rem]'>🍍</h1>
       </div>
     </div>

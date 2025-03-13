@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { hasPermission } from '@/utils/permissions/rbac'
 import { ArrowLeft } from 'lucide-react'
 
-export const Route = createFileRoute('/event-analyzer/event-list/')({
+export const Route = createFileRoute('/dashboard/event-analyzer/event-list/')({
   component: EventList,
 })
 
@@ -14,7 +14,7 @@ function EventList() {
   <div>
     <div className='flex justify-between items-center'>
       <div className='flex'> 
-        <Link to={'/event-analyzer'}>
+        <Link to={'/dashboard/event-analyzer'}>
           <Button variant='ghost' className='font-semibold rounded'>
             <ArrowLeft className='h-5 w-5' />
           </Button>
@@ -22,7 +22,7 @@ function EventList() {
         <h1 className='text-2xl font-semibold'>Event List</h1>
       </div>
       {hasPermission({roles: ['admin'], id: '1', blockedBy: []}, "eventAnalyzer", "create") && (
-        <Link to={'/event-analyzer/addedit/$eventId'} params={{ eventId: 'new' }}>
+        <Link to={'/dashboard/event-analyzer/addedit/$eventId'} params={{ eventId: 'new' }}>
           <Button className='font-semibold'>Add Event</Button>
         </Link>
       )}

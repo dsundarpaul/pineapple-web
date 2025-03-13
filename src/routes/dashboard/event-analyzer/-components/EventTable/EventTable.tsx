@@ -149,7 +149,7 @@ export function EventTable({ viewMode }: EventTableProps) {
           </DropdownMenuContent>
         </DropdownMenu>
         {viewMode === VIEW_MODE.COMPACT && (
-          <Link to="/event-analyzer/event-list">
+          <Link to="/dashboard/event-analyzer/event-list">
             <Button variant="link" size="sm" onClick={() => table.resetColumnFilters()} className="gap-1">
                 Show All 
             </Button>

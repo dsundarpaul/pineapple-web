@@ -1,26 +1,49 @@
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { ProductRegistrationFormSchema } from '@/utils/formSchemas/product-registration.formschema'
+import { ProductRegistrationFormSchema } from '@/utils/formSchemas/product.formschemas'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { createFileRoute } from '@tanstack/react-router'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+import { useMutation } from '@tanstack/react-query'
+import { adminApi } from '@/api'
 
-export const Route = createFileRoute('/product-registration/')({
+export const Route = createFileRoute('/dashboard/product-registration/')({
   component: ProductRegistation,
 })
 
 function ProductRegistation() {
+  const { mutate, isPending } = useMutation({
+    mutationFn: (data: z.infer<typeof ProductRegistrationFormSchema>) => {
+      return adminApi.post('/products', data);
+    },
+    onMutate: () => {
+        window.alert('Product registered successfully');
+    },
+  })
 
   const form = useForm<z.infer<typeof ProductRegistrationFormSchema>>({
     resolver: zodResolver(ProductRegistrationFormSchema),
   })
+
+  const onSubmit = async (data: z.infer<typeof ProductRegistrationFormSchema>) => {
+    console.log(data)
+    try {
+      mutate(data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
   
   return (
     <div className='m-auto'>
+      <div className='mb-8'>
+        <h1 className='text-2xl font-bold'>Product Registration</h1>
+        <p className='text-gray-500'>Register your product to get insights on social media </p>
+      </div>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit((data) => console.log(data))} className='space-y-4'>
+        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
           <FormField
             control={form.control}
             name="productName"
@@ -64,7 +87,7 @@ function ProductRegistation() {
             )}
           />
           <div className='w-full flex justify-end mt-3'>
-            <Button type='submit'>Submit</Button>
+            <Button type='submit'>Submit {isPending && <>...</>}</Button>
           </div>
         </form>
       </Form>

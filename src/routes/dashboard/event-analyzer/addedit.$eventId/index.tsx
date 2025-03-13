@@ -1,17 +1,20 @@
-import { Input } from '@/components/ui/input'
-import { createFileRoute, useParams, useRouter } from '@tanstack/react-router'
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useFieldArray, useForm } from "react-hook-form"
-import { CreateEditEventFormSchema } from '@/utils/formSchemas/event-analyzer.formschema'
-import { z } from "zod"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { Textarea } from '@/components/ui/textarea'
-import { ArrowLeft, Plus, PlusIcon, Trash2Icon } from 'lucide-react'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { DateTimePicker } from '@/components/ui/date-time-picker'
+import { Textarea } from '@/components/ui/textarea'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 
-export const Route = createFileRoute('/event-analyzer/addedit/$eventId/')({
+import { ArrowLeft, Plus, PlusIcon, Trash2Icon } from 'lucide-react'
+
+import { zodResolver } from "@hookform/resolvers/zod"
+import { createFileRoute, useParams, useRouter } from '@tanstack/react-router'
+import { useFieldArray, useForm } from "react-hook-form"
+import { z } from "zod"
+
+import { CreateEditEventFormSchema } from '@/utils/formSchemas/event-analyzer.formschema'
+
+export const Route = createFileRoute('/dashboard/event-analyzer/addedit/$eventId/')({
   component: RouteComponent,
 })
 
@@ -24,7 +27,7 @@ const socialPlatforms = [
 ];
 
 function RouteComponent() {
-  const { eventId } = useParams({ from: '/event-analyzer/addedit/$eventId/' })
+  const { eventId } = useParams({ from: '/dashboard/event-analyzer/addedit/$eventId/' })
   const router = useRouter();
 
   const form = useForm<z.infer<typeof CreateEditEventFormSchema>>({

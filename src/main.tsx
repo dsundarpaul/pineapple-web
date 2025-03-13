@@ -5,6 +5,7 @@ import { RouterProvider, createRouter } from '@tanstack/react-router'
 import { routeTree } from './routeTree.gen'
 import './index.css'
 import { ClerkProvider } from '@clerk/clerk-react'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 // Set up Router instance
 const router = createRouter({
@@ -19,6 +20,9 @@ if (!PUBLISHABLE_KEY) {
   throw new Error("Missing Publishable Key")
 }
 
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { retry: 3, retryDelay: 1000 }}
+})
 
 const rootElement = document.getElementById('root');
 
@@ -26,7 +30,9 @@ if(rootElement && !rootElement.innerHTML) {
   const root = createRoot(rootElement)
   root.render(
   <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </ClerkProvider>
   )
 }

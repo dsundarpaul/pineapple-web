@@ -72,14 +72,14 @@ export const columns: ColumnDef<Event>[] = [
       return (
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1">
-            <Link to={`/event-analyzer/attendee/$eventId`} params={{ eventId: row.getValue("id") as string }} className="flex items-center">
+            <Link to={`/dashboard/event-analyzer/attendee/$eventId`} params={{ eventId: row.getValue("id") as string }} className="flex items-center">
               <Users className="h-4 w-4" />
               <span className="text-lg">{attendees || 0}</span>
             </Link>
           </div>
           /
           <div className="flex items-center gap-1">
-            <Link to={`/event-analyzer/rsvp/$eventId`} params={{ eventId: row.getValue("id") as string }} className="flex items-center">
+            <Link to={`/dashboard/event-analyzer/rsvp/$eventId`} params={{ eventId: row.getValue("id") as string }} className="flex items-center">
               <Mails className="h-4 w-4" />
               <span className="text-lg">{rsvps || 0}</span>
             </Link>

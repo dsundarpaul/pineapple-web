@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "generate-routes": "tsr generate",
+    "watch-routes": "tsr generate --watch"
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.24.0",
@@ -36,6 +38,7 @@
     "@tanstack/react-query": "^5.66.0",
     "@tanstack/react-router": "^1.99.6",
     "@tanstack/react-table": "^8.20.6",
+    "axios": "^1.8.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
@@ -53,6 +56,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
+    "@tanstack/router-cli": "^1.112.0",
     "@tanstack/router-plugin": "^1.99.6",
     "@types/node": "^22.13.1",
     "@types/react": "^18.3.18",

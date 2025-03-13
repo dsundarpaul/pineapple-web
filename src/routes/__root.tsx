@@ -7,9 +7,7 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <div>
-      <div className='p-3'>
-        <Outlet />
-      </div>
+      <Outlet />
     </div>
   )
 }

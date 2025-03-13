@@ -41,22 +41,18 @@ export const NAV_ITEMS = {
     },
     {
       title: "Event Analyzer",
-      url: "/event-analyzer",
+      url: "/dashboard/event-analyzer",
       icon: SquareTerminal,
       isActive: true,
       items: [
         {
           title: "Event Dashboard",
-          url: "/event-analyzer",
+          url: "/dashboard/event-analyzer",
         },
         {
           title: "Add Event",
-          url: "/event-analyzer/addedit/new",
-        },
-        {
-          title: "Attendees List",
-          url: "#",
-        },
+          url: "/dashboard/event-analyzer/addedit/new",
+        }
       ],
     },
     {
@@ -107,8 +103,8 @@ export const NAV_ITEMS = {
       icon: Settings2,
       items: [
         {
-          title: "General",
-          url: "#",
+          title: "Create Product",
+          url: "/dashboard/product-registration",
         },
         {
           title: "Team",

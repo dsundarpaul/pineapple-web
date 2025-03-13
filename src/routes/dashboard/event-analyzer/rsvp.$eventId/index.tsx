@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/breadcrumb"
 
 
-export const Route = createFileRoute('/event-analyzer/rsvp/$eventId/')({
+export const Route = createFileRoute('/dashboard/event-analyzer/rsvp/$eventId/')({
   component: RouteComponent,
 })
 
