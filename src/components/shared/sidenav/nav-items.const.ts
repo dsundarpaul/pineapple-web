@@ -37,7 +37,7 @@ export const NAV_ITEMS = {
   navMain: [
     {
       title: 'Dashboard',
-      url: '/dashboard'
+      url: '/home'
     },
     {
       title: "Event Analyzer",
@@ -105,6 +105,10 @@ export const NAV_ITEMS = {
         {
           title: "Create Product",
           url: "/dashboard/product-registration",
+        },
+        {
+          title: "Product Settings",
+          url: "/dashboard/product-settings",
         },
         {
           title: "Team",

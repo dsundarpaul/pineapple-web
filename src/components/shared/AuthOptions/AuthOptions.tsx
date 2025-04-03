@@ -5,18 +5,24 @@ import { useQuery } from "@tanstack/react-query"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { adminApi } from "@/api"
 import { PlusIcon } from "lucide-react"
+import { useZustandStore } from "@/store/context"
+import { QuestionMarkCircledIcon } from "@radix-ui/react-icons"
 
 type AuthOptionsProps = {
   inLanginPage?: boolean
+  hideProductSelect?: boolean
 }
 
-const AuthOptions = ({ inLanginPage = false }: AuthOptionsProps) => {
+const AuthOptions = ({ inLanginPage = false, hideProductSelect = false }: AuthOptionsProps) => {
   const { user } = useUser()
+
+  const { setSelectedProduct, setProducts }= useZustandStore(state => state)
 
   const { data: ProductsList, isFetching: isFetchingProducts } = useQuery({
     queryKey: ['products'],
     queryFn: async () => {
       const response = await adminApi.get('/products', { withCredentials: true })
+      setProducts(response.data)
       return response.data
     },
     enabled: !!user
@@ -24,13 +30,13 @@ const AuthOptions = ({ inLanginPage = false }: AuthOptionsProps) => {
 
   const renderSelect = () => (
     <>
-      <Select>
+      <Select onValueChange={(value) => setSelectedProduct(value)}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="" />
         </SelectTrigger>
         <SelectContent>
           {ProductsList?.map((item: { id: string; productName: string }) => (
-            <SelectItem value={item.productName} key={item.id}>{item.productName}</SelectItem>
+            <SelectItem value={item.id} key={item.id}>{item.productName}</SelectItem>
           ))}
           {isFetchingProducts && (
             <SelectItem value={'SelectItem-add-product'}>
@@ -51,12 +57,18 @@ const AuthOptions = ({ inLanginPage = false }: AuthOptionsProps) => {
 
   return (
     <div className='flex space-x-4'>
+      <Button className="rounded flex items-center" variant={'outline'}><QuestionMarkCircledIcon /></Button>
       <SignedIn>
-        <div className="flex items-center gap-4">
-          {renderSelect()}
+        <div className='flex items-center gap-4'>
+          {hideProductSelect && renderSelect()}
+          <Button className='rounded'>Upgrade</Button>
           <p>{user?.fullName}</p>
           <UserButton />
-          {inLanginPage && <Link to='/dashboard'><Button>Dashboard</Button></Link> }
+          {inLanginPage && (
+            <Link to='/home'>
+              <Button>Dashboard</Button>
+            </Link>
+          )}
         </div>
       </SignedIn>
       <SignedOut>
@@ -65,7 +77,7 @@ const AuthOptions = ({ inLanginPage = false }: AuthOptionsProps) => {
         </Button>
       </SignedOut>
     </div>
-  )
+  );
 }
 
 export default AuthOptions

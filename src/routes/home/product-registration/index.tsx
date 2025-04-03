@@ -3,17 +3,19 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from '@/components/ui/input'
 import { ProductRegistrationFormSchema } from '@/utils/formSchemas/product.formschemas'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { useMutation } from '@tanstack/react-query'
 import { adminApi } from '@/api'
 
-export const Route = createFileRoute('/dashboard/product-registration/')({
+export const Route = createFileRoute('/home/product-registration/')({
   component: ProductRegistation,
 })
 
 function ProductRegistation() {
+  const router = useRouter();
+  
   const { mutate, isPending } = useMutation({
     mutationFn: (data: z.infer<typeof ProductRegistrationFormSchema>) => {
       return adminApi.post('/products', data);
@@ -86,7 +88,8 @@ function ProductRegistation() {
               </FormItem>
             )}
           />
-          <div className='w-full flex justify-end mt-3'>
+          <div className='w-full flex justify-end mt-3 space-x-2'>
+            <Button type='button' onClick={() => router.history.back()}>Cancel {isPending && <>...</>}</Button>
             <Button type='submit'>Submit {isPending && <>...</>}</Button>
           </div>
         </form>
