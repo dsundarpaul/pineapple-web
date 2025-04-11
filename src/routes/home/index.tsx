@@ -23,7 +23,7 @@ function RouteComponent() {
           </Link>
         </div>
       </div>
-      
+
       <div className='grid grid-cols-3 gap-4 mt-4'>
         {products?.map((product: Product) => (
           <Link to={`/home/${product.id}`} key={product.id}>

@@ -18,6 +18,7 @@ const NavFooter = () => {
           onClick={() => signOut()}
         >
           <Button
+            asChild
             variant={'ghost'}
             className='data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground p-2'
           >

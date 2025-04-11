@@ -6,6 +6,7 @@ import { routeTree } from './routeTree.gen'
 import './index.css'
 import { ClerkProvider } from '@clerk/clerk-react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { Toaster } from './components/ui/toaster'
 
 // Set up Router instance
 const router = createRouter({
@@ -32,6 +33,7 @@ if(rootElement && !rootElement.innerHTML) {
   <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
+      <Toaster />
     </QueryClientProvider>
   </ClerkProvider>
   )

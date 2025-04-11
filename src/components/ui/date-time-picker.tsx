@@ -14,14 +14,19 @@ import {
 } from "@/components/ui/popover";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
  
-export function DateTimePicker() {
-  const [date, setDate] = React.useState<Date>();
+type DateTimePickerProps = {
+  defaultDate: Date | null;
+  onDateChange: (date: Date) => void;
+  disabledDateBefore?: Date;
+};
+
+export function DateTimePicker({ defaultDate: initalDate, onDateChange, disabledDateBefore }: DateTimePickerProps) {
   const [isOpen, setIsOpen] = React.useState(false);
  
   const hours = Array.from({ length: 12 }, (_, i) => i + 1);
   const handleDateSelect = (selectedDate: Date | undefined) => {
     if (selectedDate) {
-      setDate(selectedDate);
+      onDateChange(selectedDate)
     }
   };
  
@@ -29,8 +34,8 @@ export function DateTimePicker() {
     type: "hour" | "minute" | "ampm",
     value: string
   ) => {
-    if (date) {
-      const newDate = new Date(date);
+    if (initalDate) {
+      const newDate = new Date(initalDate);
       if (type === "hour") {
         newDate.setHours(
           (parseInt(value) % 12) + (newDate.getHours() >= 12 ? 12 : 0)
@@ -43,7 +48,7 @@ export function DateTimePicker() {
           value === "PM" ? currentHours + 12 : currentHours - 12
         );
       }
-      setDate(newDate);
+      onDateChange(newDate);
     }
   };
  
@@ -54,12 +59,12 @@ export function DateTimePicker() {
           variant="outline"
           className={cn(
             "w-full justify-start text-left font-normal",
-            !date && "text-muted-foreground"
+            !initalDate && "text-muted-foreground"
           )}
         >
           <CalendarIcon className="mr-2 h-4 w-4" />
-          {date ? (
-            format(date, "MM/dd/yyyy hh:mm aa")
+          {initalDate ? (
+            format(initalDate, "MM/dd/yyyy hh:mm aa")
           ) : (
             <span>MM/DD/YYYY hh:mm aa</span>
           )}
@@ -69,8 +74,9 @@ export function DateTimePicker() {
         <div className="sm:flex">
           <Calendar
             mode="single"
-            selected={date}
+            selected={initalDate || undefined}
             onSelect={handleDateSelect}
+            disabled={date => disabledDateBefore ? date < disabledDateBefore : false}
             initialFocus
           />
           <div className="flex flex-col sm:flex-row sm:h-[300px] divide-y sm:divide-y-0 sm:divide-x">
@@ -81,7 +87,7 @@ export function DateTimePicker() {
                     key={hour}
                     size="icon"
                     variant={
-                      date && date.getHours() % 12 === hour % 12
+                      initalDate && initalDate.getHours() % 12 === hour % 12
                         ? "default"
                         : "ghost"
                     }
@@ -101,7 +107,7 @@ export function DateTimePicker() {
                     key={minute}
                     size="icon"
                     variant={
-                      date && date.getMinutes() === minute
+                      initalDate && initalDate.getMinutes() === minute
                         ? "default"
                         : "ghost"
                     }
@@ -123,9 +129,9 @@ export function DateTimePicker() {
                     key={ampm}
                     size="icon"
                     variant={
-                      date &&
-                      ((ampm === "AM" && date.getHours() < 12) ||
-                        (ampm === "PM" && date.getHours() >= 12))
+                      initalDate &&
+                      ((ampm === "AM" && initalDate.getHours() < 12) ||
+                        (ampm === "PM" && initalDate.getHours() >= 12))
                         ? "default"
                         : "ghost"
                     }

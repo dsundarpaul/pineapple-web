@@ -11,12 +11,40 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as HomeRouteImport } from './routes/home/route'
+import { Route as DashboardRouteImport } from './routes/dashboard/route'
 import { Route as IndexImport } from './routes/index'
-import { Route as ProductRegistrationIndexImport } from './routes/product-registration/index'
-import { Route as EventAnalyzerIndexImport } from './routes/event-analyzer/index'
+import { Route as HomeIndexImport } from './routes/home/index'
 import { Route as DashboardIndexImport } from './routes/dashboard/index'
+import { Route as AuthIndexImport } from './routes/auth/index'
+import { Route as HomeProductRegistrationIndexImport } from './routes/home/product-registration/index'
+import { Route as HomeProductIdIndexImport } from './routes/home/$productId/index'
+import { Route as DashboardProductSettingsIndexImport } from './routes/dashboard/product-settings/index'
+import { Route as DashboardProductRegistrationIndexImport } from './routes/dashboard/product-registration/index'
+import { Route as DashboardEventAnalyzerIndexImport } from './routes/dashboard/event-analyzer/index'
+import { Route as HomeProductIdEventAnalyzerIndexImport } from './routes/home/$productId/event-analyzer/index'
+import { Route as DashboardEventAnalyzerEventListIndexImport } from './routes/dashboard/event-analyzer/event-list/index'
+import { Route as HomeProductIdEventAnalyzerEventListIndexImport } from './routes/home/$productId/event-analyzer/event-list/index'
+import { Route as DashboardEventAnalyzerRsvpEventIdIndexImport } from './routes/dashboard/event-analyzer/rsvp.$eventId/index'
+import { Route as DashboardEventAnalyzerAttendeeEventIdIndexImport } from './routes/dashboard/event-analyzer/attendee.$eventId/index'
+import { Route as DashboardEventAnalyzerAddeditEventIdIndexImport } from './routes/dashboard/event-analyzer/addedit.$eventId/index'
+import { Route as HomeProductIdEventAnalyzerRsvpEventIdIndexImport } from './routes/home/$productId/event-analyzer/rsvp.$eventId/index'
+import { Route as HomeProductIdEventAnalyzerAttendeeEventIdIndexImport } from './routes/home/$productId/event-analyzer/attendee.$eventId/index'
+import { Route as HomeProductIdEventAnalyzerAddeditEventIdIndexImport } from './routes/home/$productId/event-analyzer/addedit.$eventId/index'
 
 // Create/Update Routes
+
+const HomeRouteRoute = HomeRouteImport.update({
+  id: '/home',
+  path: '/home',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DashboardRouteRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
@@ -24,23 +52,120 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const ProductRegistrationIndexRoute = ProductRegistrationIndexImport.update({
-  id: '/product-registration/',
-  path: '/product-registration/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const EventAnalyzerIndexRoute = EventAnalyzerIndexImport.update({
-  id: '/event-analyzer/',
-  path: '/event-analyzer/',
-  getParentRoute: () => rootRoute,
+const HomeIndexRoute = HomeIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => HomeRouteRoute,
 } as any)
 
 const DashboardIndexRoute = DashboardIndexImport.update({
-  id: '/dashboard/',
-  path: '/dashboard/',
+  id: '/',
+  path: '/',
+  getParentRoute: () => DashboardRouteRoute,
+} as any)
+
+const AuthIndexRoute = AuthIndexImport.update({
+  id: '/auth/',
+  path: '/auth/',
   getParentRoute: () => rootRoute,
 } as any)
+
+const HomeProductRegistrationIndexRoute =
+  HomeProductRegistrationIndexImport.update({
+    id: '/product-registration/',
+    path: '/product-registration/',
+    getParentRoute: () => HomeRouteRoute,
+  } as any)
+
+const HomeProductIdIndexRoute = HomeProductIdIndexImport.update({
+  id: '/$productId/',
+  path: '/$productId/',
+  getParentRoute: () => HomeRouteRoute,
+} as any)
+
+const DashboardProductSettingsIndexRoute =
+  DashboardProductSettingsIndexImport.update({
+    id: '/product-settings/',
+    path: '/product-settings/',
+    getParentRoute: () => DashboardRouteRoute,
+  } as any)
+
+const DashboardProductRegistrationIndexRoute =
+  DashboardProductRegistrationIndexImport.update({
+    id: '/product-registration/',
+    path: '/product-registration/',
+    getParentRoute: () => DashboardRouteRoute,
+  } as any)
+
+const DashboardEventAnalyzerIndexRoute =
+  DashboardEventAnalyzerIndexImport.update({
+    id: '/event-analyzer/',
+    path: '/event-analyzer/',
+    getParentRoute: () => DashboardRouteRoute,
+  } as any)
+
+const HomeProductIdEventAnalyzerIndexRoute =
+  HomeProductIdEventAnalyzerIndexImport.update({
+    id: '/$productId/event-analyzer/',
+    path: '/$productId/event-analyzer/',
+    getParentRoute: () => HomeRouteRoute,
+  } as any)
+
+const DashboardEventAnalyzerEventListIndexRoute =
+  DashboardEventAnalyzerEventListIndexImport.update({
+    id: '/event-analyzer/event-list/',
+    path: '/event-analyzer/event-list/',
+    getParentRoute: () => DashboardRouteRoute,
+  } as any)
+
+const HomeProductIdEventAnalyzerEventListIndexRoute =
+  HomeProductIdEventAnalyzerEventListIndexImport.update({
+    id: '/$productId/event-analyzer/event-list/',
+    path: '/$productId/event-analyzer/event-list/',
+    getParentRoute: () => HomeRouteRoute,
+  } as any)
+
+const DashboardEventAnalyzerRsvpEventIdIndexRoute =
+  DashboardEventAnalyzerRsvpEventIdIndexImport.update({
+    id: '/event-analyzer/rsvp/$eventId/',
+    path: '/event-analyzer/rsvp/$eventId/',
+    getParentRoute: () => DashboardRouteRoute,
+  } as any)
+
+const DashboardEventAnalyzerAttendeeEventIdIndexRoute =
+  DashboardEventAnalyzerAttendeeEventIdIndexImport.update({
+    id: '/event-analyzer/attendee/$eventId/',
+    path: '/event-analyzer/attendee/$eventId/',
+    getParentRoute: () => DashboardRouteRoute,
+  } as any)
+
+const DashboardEventAnalyzerAddeditEventIdIndexRoute =
+  DashboardEventAnalyzerAddeditEventIdIndexImport.update({
+    id: '/event-analyzer/addedit/$eventId/',
+    path: '/event-analyzer/addedit/$eventId/',
+    getParentRoute: () => DashboardRouteRoute,
+  } as any)
+
+const HomeProductIdEventAnalyzerRsvpEventIdIndexRoute =
+  HomeProductIdEventAnalyzerRsvpEventIdIndexImport.update({
+    id: '/$productId/event-analyzer/rsvp/$eventId/',
+    path: '/$productId/event-analyzer/rsvp/$eventId/',
+    getParentRoute: () => HomeRouteRoute,
+  } as any)
+
+const HomeProductIdEventAnalyzerAttendeeEventIdIndexRoute =
+  HomeProductIdEventAnalyzerAttendeeEventIdIndexImport.update({
+    id: '/$productId/event-analyzer/attendee/$eventId/',
+    path: '/$productId/event-analyzer/attendee/$eventId/',
+    getParentRoute: () => HomeRouteRoute,
+  } as any)
+
+const HomeProductIdEventAnalyzerAddeditEventIdIndexRoute =
+  HomeProductIdEventAnalyzerAddeditEventIdIndexImport.update({
+    id: '/$productId/event-analyzer/addedit/$eventId/',
+    path: '/$productId/event-analyzer/addedit/$eventId/',
+    getParentRoute: () => HomeRouteRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -53,80 +178,353 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/dashboard/': {
-      id: '/dashboard/'
+    '/dashboard': {
+      id: '/dashboard'
       path: '/dashboard'
       fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRoute
+    }
+    '/home': {
+      id: '/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof HomeRouteImport
+      parentRoute: typeof rootRoute
+    }
+    '/auth/': {
+      id: '/auth/'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/'
+      fullPath: '/dashboard/'
       preLoaderRoute: typeof DashboardIndexImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof DashboardRouteImport
     }
-    '/event-analyzer/': {
-      id: '/event-analyzer/'
+    '/home/': {
+      id: '/home/'
+      path: '/'
+      fullPath: '/home/'
+      preLoaderRoute: typeof HomeIndexImport
+      parentRoute: typeof HomeRouteImport
+    }
+    '/dashboard/event-analyzer/': {
+      id: '/dashboard/event-analyzer/'
       path: '/event-analyzer'
-      fullPath: '/event-analyzer'
-      preLoaderRoute: typeof EventAnalyzerIndexImport
-      parentRoute: typeof rootRoute
+      fullPath: '/dashboard/event-analyzer'
+      preLoaderRoute: typeof DashboardEventAnalyzerIndexImport
+      parentRoute: typeof DashboardRouteImport
     }
-    '/product-registration/': {
-      id: '/product-registration/'
+    '/dashboard/product-registration/': {
+      id: '/dashboard/product-registration/'
       path: '/product-registration'
-      fullPath: '/product-registration'
-      preLoaderRoute: typeof ProductRegistrationIndexImport
-      parentRoute: typeof rootRoute
+      fullPath: '/dashboard/product-registration'
+      preLoaderRoute: typeof DashboardProductRegistrationIndexImport
+      parentRoute: typeof DashboardRouteImport
+    }
+    '/dashboard/product-settings/': {
+      id: '/dashboard/product-settings/'
+      path: '/product-settings'
+      fullPath: '/dashboard/product-settings'
+      preLoaderRoute: typeof DashboardProductSettingsIndexImport
+      parentRoute: typeof DashboardRouteImport
+    }
+    '/home/$productId/': {
+      id: '/home/$productId/'
+      path: '/$productId'
+      fullPath: '/home/$productId'
+      preLoaderRoute: typeof HomeProductIdIndexImport
+      parentRoute: typeof HomeRouteImport
+    }
+    '/home/product-registration/': {
+      id: '/home/product-registration/'
+      path: '/product-registration'
+      fullPath: '/home/product-registration'
+      preLoaderRoute: typeof HomeProductRegistrationIndexImport
+      parentRoute: typeof HomeRouteImport
+    }
+    '/dashboard/event-analyzer/event-list/': {
+      id: '/dashboard/event-analyzer/event-list/'
+      path: '/event-analyzer/event-list'
+      fullPath: '/dashboard/event-analyzer/event-list'
+      preLoaderRoute: typeof DashboardEventAnalyzerEventListIndexImport
+      parentRoute: typeof DashboardRouteImport
+    }
+    '/home/$productId/event-analyzer/': {
+      id: '/home/$productId/event-analyzer/'
+      path: '/$productId/event-analyzer'
+      fullPath: '/home/$productId/event-analyzer'
+      preLoaderRoute: typeof HomeProductIdEventAnalyzerIndexImport
+      parentRoute: typeof HomeRouteImport
+    }
+    '/dashboard/event-analyzer/addedit/$eventId/': {
+      id: '/dashboard/event-analyzer/addedit/$eventId/'
+      path: '/event-analyzer/addedit/$eventId'
+      fullPath: '/dashboard/event-analyzer/addedit/$eventId'
+      preLoaderRoute: typeof DashboardEventAnalyzerAddeditEventIdIndexImport
+      parentRoute: typeof DashboardRouteImport
+    }
+    '/dashboard/event-analyzer/attendee/$eventId/': {
+      id: '/dashboard/event-analyzer/attendee/$eventId/'
+      path: '/event-analyzer/attendee/$eventId'
+      fullPath: '/dashboard/event-analyzer/attendee/$eventId'
+      preLoaderRoute: typeof DashboardEventAnalyzerAttendeeEventIdIndexImport
+      parentRoute: typeof DashboardRouteImport
+    }
+    '/dashboard/event-analyzer/rsvp/$eventId/': {
+      id: '/dashboard/event-analyzer/rsvp/$eventId/'
+      path: '/event-analyzer/rsvp/$eventId'
+      fullPath: '/dashboard/event-analyzer/rsvp/$eventId'
+      preLoaderRoute: typeof DashboardEventAnalyzerRsvpEventIdIndexImport
+      parentRoute: typeof DashboardRouteImport
+    }
+    '/home/$productId/event-analyzer/event-list/': {
+      id: '/home/$productId/event-analyzer/event-list/'
+      path: '/$productId/event-analyzer/event-list'
+      fullPath: '/home/$productId/event-analyzer/event-list'
+      preLoaderRoute: typeof HomeProductIdEventAnalyzerEventListIndexImport
+      parentRoute: typeof HomeRouteImport
+    }
+    '/home/$productId/event-analyzer/addedit/$eventId/': {
+      id: '/home/$productId/event-analyzer/addedit/$eventId/'
+      path: '/$productId/event-analyzer/addedit/$eventId'
+      fullPath: '/home/$productId/event-analyzer/addedit/$eventId'
+      preLoaderRoute: typeof HomeProductIdEventAnalyzerAddeditEventIdIndexImport
+      parentRoute: typeof HomeRouteImport
+    }
+    '/home/$productId/event-analyzer/attendee/$eventId/': {
+      id: '/home/$productId/event-analyzer/attendee/$eventId/'
+      path: '/$productId/event-analyzer/attendee/$eventId'
+      fullPath: '/home/$productId/event-analyzer/attendee/$eventId'
+      preLoaderRoute: typeof HomeProductIdEventAnalyzerAttendeeEventIdIndexImport
+      parentRoute: typeof HomeRouteImport
+    }
+    '/home/$productId/event-analyzer/rsvp/$eventId/': {
+      id: '/home/$productId/event-analyzer/rsvp/$eventId/'
+      path: '/$productId/event-analyzer/rsvp/$eventId'
+      fullPath: '/home/$productId/event-analyzer/rsvp/$eventId'
+      preLoaderRoute: typeof HomeProductIdEventAnalyzerRsvpEventIdIndexImport
+      parentRoute: typeof HomeRouteImport
     }
   }
 }
 
 // Create and export the route tree
 
+interface DashboardRouteRouteChildren {
+  DashboardIndexRoute: typeof DashboardIndexRoute
+  DashboardEventAnalyzerIndexRoute: typeof DashboardEventAnalyzerIndexRoute
+  DashboardProductRegistrationIndexRoute: typeof DashboardProductRegistrationIndexRoute
+  DashboardProductSettingsIndexRoute: typeof DashboardProductSettingsIndexRoute
+  DashboardEventAnalyzerEventListIndexRoute: typeof DashboardEventAnalyzerEventListIndexRoute
+  DashboardEventAnalyzerAddeditEventIdIndexRoute: typeof DashboardEventAnalyzerAddeditEventIdIndexRoute
+  DashboardEventAnalyzerAttendeeEventIdIndexRoute: typeof DashboardEventAnalyzerAttendeeEventIdIndexRoute
+  DashboardEventAnalyzerRsvpEventIdIndexRoute: typeof DashboardEventAnalyzerRsvpEventIdIndexRoute
+}
+
+const DashboardRouteRouteChildren: DashboardRouteRouteChildren = {
+  DashboardIndexRoute: DashboardIndexRoute,
+  DashboardEventAnalyzerIndexRoute: DashboardEventAnalyzerIndexRoute,
+  DashboardProductRegistrationIndexRoute:
+    DashboardProductRegistrationIndexRoute,
+  DashboardProductSettingsIndexRoute: DashboardProductSettingsIndexRoute,
+  DashboardEventAnalyzerEventListIndexRoute:
+    DashboardEventAnalyzerEventListIndexRoute,
+  DashboardEventAnalyzerAddeditEventIdIndexRoute:
+    DashboardEventAnalyzerAddeditEventIdIndexRoute,
+  DashboardEventAnalyzerAttendeeEventIdIndexRoute:
+    DashboardEventAnalyzerAttendeeEventIdIndexRoute,
+  DashboardEventAnalyzerRsvpEventIdIndexRoute:
+    DashboardEventAnalyzerRsvpEventIdIndexRoute,
+}
+
+const DashboardRouteRouteWithChildren = DashboardRouteRoute._addFileChildren(
+  DashboardRouteRouteChildren,
+)
+
+interface HomeRouteRouteChildren {
+  HomeIndexRoute: typeof HomeIndexRoute
+  HomeProductIdIndexRoute: typeof HomeProductIdIndexRoute
+  HomeProductRegistrationIndexRoute: typeof HomeProductRegistrationIndexRoute
+  HomeProductIdEventAnalyzerIndexRoute: typeof HomeProductIdEventAnalyzerIndexRoute
+  HomeProductIdEventAnalyzerEventListIndexRoute: typeof HomeProductIdEventAnalyzerEventListIndexRoute
+  HomeProductIdEventAnalyzerAddeditEventIdIndexRoute: typeof HomeProductIdEventAnalyzerAddeditEventIdIndexRoute
+  HomeProductIdEventAnalyzerAttendeeEventIdIndexRoute: typeof HomeProductIdEventAnalyzerAttendeeEventIdIndexRoute
+  HomeProductIdEventAnalyzerRsvpEventIdIndexRoute: typeof HomeProductIdEventAnalyzerRsvpEventIdIndexRoute
+}
+
+const HomeRouteRouteChildren: HomeRouteRouteChildren = {
+  HomeIndexRoute: HomeIndexRoute,
+  HomeProductIdIndexRoute: HomeProductIdIndexRoute,
+  HomeProductRegistrationIndexRoute: HomeProductRegistrationIndexRoute,
+  HomeProductIdEventAnalyzerIndexRoute: HomeProductIdEventAnalyzerIndexRoute,
+  HomeProductIdEventAnalyzerEventListIndexRoute:
+    HomeProductIdEventAnalyzerEventListIndexRoute,
+  HomeProductIdEventAnalyzerAddeditEventIdIndexRoute:
+    HomeProductIdEventAnalyzerAddeditEventIdIndexRoute,
+  HomeProductIdEventAnalyzerAttendeeEventIdIndexRoute:
+    HomeProductIdEventAnalyzerAttendeeEventIdIndexRoute,
+  HomeProductIdEventAnalyzerRsvpEventIdIndexRoute:
+    HomeProductIdEventAnalyzerRsvpEventIdIndexRoute,
+}
+
+const HomeRouteRouteWithChildren = HomeRouteRoute._addFileChildren(
+  HomeRouteRouteChildren,
+)
+
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/dashboard': typeof DashboardIndexRoute
-  '/event-analyzer': typeof EventAnalyzerIndexRoute
-  '/product-registration': typeof ProductRegistrationIndexRoute
+  '/dashboard': typeof DashboardRouteRouteWithChildren
+  '/home': typeof HomeRouteRouteWithChildren
+  '/auth': typeof AuthIndexRoute
+  '/dashboard/': typeof DashboardIndexRoute
+  '/home/': typeof HomeIndexRoute
+  '/dashboard/event-analyzer': typeof DashboardEventAnalyzerIndexRoute
+  '/dashboard/product-registration': typeof DashboardProductRegistrationIndexRoute
+  '/dashboard/product-settings': typeof DashboardProductSettingsIndexRoute
+  '/home/$productId': typeof HomeProductIdIndexRoute
+  '/home/product-registration': typeof HomeProductRegistrationIndexRoute
+  '/dashboard/event-analyzer/event-list': typeof DashboardEventAnalyzerEventListIndexRoute
+  '/home/$productId/event-analyzer': typeof HomeProductIdEventAnalyzerIndexRoute
+  '/dashboard/event-analyzer/addedit/$eventId': typeof DashboardEventAnalyzerAddeditEventIdIndexRoute
+  '/dashboard/event-analyzer/attendee/$eventId': typeof DashboardEventAnalyzerAttendeeEventIdIndexRoute
+  '/dashboard/event-analyzer/rsvp/$eventId': typeof DashboardEventAnalyzerRsvpEventIdIndexRoute
+  '/home/$productId/event-analyzer/event-list': typeof HomeProductIdEventAnalyzerEventListIndexRoute
+  '/home/$productId/event-analyzer/addedit/$eventId': typeof HomeProductIdEventAnalyzerAddeditEventIdIndexRoute
+  '/home/$productId/event-analyzer/attendee/$eventId': typeof HomeProductIdEventAnalyzerAttendeeEventIdIndexRoute
+  '/home/$productId/event-analyzer/rsvp/$eventId': typeof HomeProductIdEventAnalyzerRsvpEventIdIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthIndexRoute
   '/dashboard': typeof DashboardIndexRoute
-  '/event-analyzer': typeof EventAnalyzerIndexRoute
-  '/product-registration': typeof ProductRegistrationIndexRoute
+  '/home': typeof HomeIndexRoute
+  '/dashboard/event-analyzer': typeof DashboardEventAnalyzerIndexRoute
+  '/dashboard/product-registration': typeof DashboardProductRegistrationIndexRoute
+  '/dashboard/product-settings': typeof DashboardProductSettingsIndexRoute
+  '/home/$productId': typeof HomeProductIdIndexRoute
+  '/home/product-registration': typeof HomeProductRegistrationIndexRoute
+  '/dashboard/event-analyzer/event-list': typeof DashboardEventAnalyzerEventListIndexRoute
+  '/home/$productId/event-analyzer': typeof HomeProductIdEventAnalyzerIndexRoute
+  '/dashboard/event-analyzer/addedit/$eventId': typeof DashboardEventAnalyzerAddeditEventIdIndexRoute
+  '/dashboard/event-analyzer/attendee/$eventId': typeof DashboardEventAnalyzerAttendeeEventIdIndexRoute
+  '/dashboard/event-analyzer/rsvp/$eventId': typeof DashboardEventAnalyzerRsvpEventIdIndexRoute
+  '/home/$productId/event-analyzer/event-list': typeof HomeProductIdEventAnalyzerEventListIndexRoute
+  '/home/$productId/event-analyzer/addedit/$eventId': typeof HomeProductIdEventAnalyzerAddeditEventIdIndexRoute
+  '/home/$productId/event-analyzer/attendee/$eventId': typeof HomeProductIdEventAnalyzerAttendeeEventIdIndexRoute
+  '/home/$productId/event-analyzer/rsvp/$eventId': typeof HomeProductIdEventAnalyzerRsvpEventIdIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRouteRouteWithChildren
+  '/home': typeof HomeRouteRouteWithChildren
+  '/auth/': typeof AuthIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
-  '/event-analyzer/': typeof EventAnalyzerIndexRoute
-  '/product-registration/': typeof ProductRegistrationIndexRoute
+  '/home/': typeof HomeIndexRoute
+  '/dashboard/event-analyzer/': typeof DashboardEventAnalyzerIndexRoute
+  '/dashboard/product-registration/': typeof DashboardProductRegistrationIndexRoute
+  '/dashboard/product-settings/': typeof DashboardProductSettingsIndexRoute
+  '/home/$productId/': typeof HomeProductIdIndexRoute
+  '/home/product-registration/': typeof HomeProductRegistrationIndexRoute
+  '/dashboard/event-analyzer/event-list/': typeof DashboardEventAnalyzerEventListIndexRoute
+  '/home/$productId/event-analyzer/': typeof HomeProductIdEventAnalyzerIndexRoute
+  '/dashboard/event-analyzer/addedit/$eventId/': typeof DashboardEventAnalyzerAddeditEventIdIndexRoute
+  '/dashboard/event-analyzer/attendee/$eventId/': typeof DashboardEventAnalyzerAttendeeEventIdIndexRoute
+  '/dashboard/event-analyzer/rsvp/$eventId/': typeof DashboardEventAnalyzerRsvpEventIdIndexRoute
+  '/home/$productId/event-analyzer/event-list/': typeof HomeProductIdEventAnalyzerEventListIndexRoute
+  '/home/$productId/event-analyzer/addedit/$eventId/': typeof HomeProductIdEventAnalyzerAddeditEventIdIndexRoute
+  '/home/$productId/event-analyzer/attendee/$eventId/': typeof HomeProductIdEventAnalyzerAttendeeEventIdIndexRoute
+  '/home/$productId/event-analyzer/rsvp/$eventId/': typeof HomeProductIdEventAnalyzerRsvpEventIdIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/event-analyzer' | '/product-registration'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/home'
+    | '/auth'
+    | '/dashboard/'
+    | '/home/'
+    | '/dashboard/event-analyzer'
+    | '/dashboard/product-registration'
+    | '/dashboard/product-settings'
+    | '/home/$productId'
+    | '/home/product-registration'
+    | '/dashboard/event-analyzer/event-list'
+    | '/home/$productId/event-analyzer'
+    | '/dashboard/event-analyzer/addedit/$eventId'
+    | '/dashboard/event-analyzer/attendee/$eventId'
+    | '/dashboard/event-analyzer/rsvp/$eventId'
+    | '/home/$productId/event-analyzer/event-list'
+    | '/home/$productId/event-analyzer/addedit/$eventId'
+    | '/home/$productId/event-analyzer/attendee/$eventId'
+    | '/home/$productId/event-analyzer/rsvp/$eventId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/event-analyzer' | '/product-registration'
+  to:
+    | '/'
+    | '/auth'
+    | '/dashboard'
+    | '/home'
+    | '/dashboard/event-analyzer'
+    | '/dashboard/product-registration'
+    | '/dashboard/product-settings'
+    | '/home/$productId'
+    | '/home/product-registration'
+    | '/dashboard/event-analyzer/event-list'
+    | '/home/$productId/event-analyzer'
+    | '/dashboard/event-analyzer/addedit/$eventId'
+    | '/dashboard/event-analyzer/attendee/$eventId'
+    | '/dashboard/event-analyzer/rsvp/$eventId'
+    | '/home/$productId/event-analyzer/event-list'
+    | '/home/$productId/event-analyzer/addedit/$eventId'
+    | '/home/$productId/event-analyzer/attendee/$eventId'
+    | '/home/$productId/event-analyzer/rsvp/$eventId'
   id:
     | '__root__'
     | '/'
+    | '/dashboard'
+    | '/home'
+    | '/auth/'
     | '/dashboard/'
-    | '/event-analyzer/'
-    | '/product-registration/'
+    | '/home/'
+    | '/dashboard/event-analyzer/'
+    | '/dashboard/product-registration/'
+    | '/dashboard/product-settings/'
+    | '/home/$productId/'
+    | '/home/product-registration/'
+    | '/dashboard/event-analyzer/event-list/'
+    | '/home/$productId/event-analyzer/'
+    | '/dashboard/event-analyzer/addedit/$eventId/'
+    | '/dashboard/event-analyzer/attendee/$eventId/'
+    | '/dashboard/event-analyzer/rsvp/$eventId/'
+    | '/home/$productId/event-analyzer/event-list/'
+    | '/home/$productId/event-analyzer/addedit/$eventId/'
+    | '/home/$productId/event-analyzer/attendee/$eventId/'
+    | '/home/$productId/event-analyzer/rsvp/$eventId/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  DashboardIndexRoute: typeof DashboardIndexRoute
-  EventAnalyzerIndexRoute: typeof EventAnalyzerIndexRoute
-  ProductRegistrationIndexRoute: typeof ProductRegistrationIndexRoute
+  DashboardRouteRoute: typeof DashboardRouteRouteWithChildren
+  HomeRouteRoute: typeof HomeRouteRouteWithChildren
+  AuthIndexRoute: typeof AuthIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  DashboardIndexRoute: DashboardIndexRoute,
-  EventAnalyzerIndexRoute: EventAnalyzerIndexRoute,
-  ProductRegistrationIndexRoute: ProductRegistrationIndexRoute,
+  DashboardRouteRoute: DashboardRouteRouteWithChildren,
+  HomeRouteRoute: HomeRouteRouteWithChildren,
+  AuthIndexRoute: AuthIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -140,22 +538,106 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/dashboard/",
-        "/event-analyzer/",
-        "/product-registration/"
+        "/dashboard",
+        "/home",
+        "/auth/"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
+    "/dashboard": {
+      "filePath": "dashboard/route.tsx",
+      "children": [
+        "/dashboard/",
+        "/dashboard/event-analyzer/",
+        "/dashboard/product-registration/",
+        "/dashboard/product-settings/",
+        "/dashboard/event-analyzer/event-list/",
+        "/dashboard/event-analyzer/addedit/$eventId/",
+        "/dashboard/event-analyzer/attendee/$eventId/",
+        "/dashboard/event-analyzer/rsvp/$eventId/"
+      ]
+    },
+    "/home": {
+      "filePath": "home/route.tsx",
+      "children": [
+        "/home/",
+        "/home/$productId/",
+        "/home/product-registration/",
+        "/home/$productId/event-analyzer/",
+        "/home/$productId/event-analyzer/event-list/",
+        "/home/$productId/event-analyzer/addedit/$eventId/",
+        "/home/$productId/event-analyzer/attendee/$eventId/",
+        "/home/$productId/event-analyzer/rsvp/$eventId/"
+      ]
+    },
+    "/auth/": {
+      "filePath": "auth/index.tsx"
+    },
     "/dashboard/": {
-      "filePath": "dashboard/index.tsx"
+      "filePath": "dashboard/index.tsx",
+      "parent": "/dashboard"
     },
-    "/event-analyzer/": {
-      "filePath": "event-analyzer/index.tsx"
+    "/home/": {
+      "filePath": "home/index.tsx",
+      "parent": "/home"
     },
-    "/product-registration/": {
-      "filePath": "product-registration/index.tsx"
+    "/dashboard/event-analyzer/": {
+      "filePath": "dashboard/event-analyzer/index.tsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/product-registration/": {
+      "filePath": "dashboard/product-registration/index.tsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/product-settings/": {
+      "filePath": "dashboard/product-settings/index.tsx",
+      "parent": "/dashboard"
+    },
+    "/home/$productId/": {
+      "filePath": "home/$productId/index.tsx",
+      "parent": "/home"
+    },
+    "/home/product-registration/": {
+      "filePath": "home/product-registration/index.tsx",
+      "parent": "/home"
+    },
+    "/dashboard/event-analyzer/event-list/": {
+      "filePath": "dashboard/event-analyzer/event-list/index.tsx",
+      "parent": "/dashboard"
+    },
+    "/home/$productId/event-analyzer/": {
+      "filePath": "home/$productId/event-analyzer/index.tsx",
+      "parent": "/home"
+    },
+    "/dashboard/event-analyzer/addedit/$eventId/": {
+      "filePath": "dashboard/event-analyzer/addedit.$eventId/index.tsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/event-analyzer/attendee/$eventId/": {
+      "filePath": "dashboard/event-analyzer/attendee.$eventId/index.tsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/event-analyzer/rsvp/$eventId/": {
+      "filePath": "dashboard/event-analyzer/rsvp.$eventId/index.tsx",
+      "parent": "/dashboard"
+    },
+    "/home/$productId/event-analyzer/event-list/": {
+      "filePath": "home/$productId/event-analyzer/event-list/index.tsx",
+      "parent": "/home"
+    },
+    "/home/$productId/event-analyzer/addedit/$eventId/": {
+      "filePath": "home/$productId/event-analyzer/addedit.$eventId/index.tsx",
+      "parent": "/home"
+    },
+    "/home/$productId/event-analyzer/attendee/$eventId/": {
+      "filePath": "home/$productId/event-analyzer/attendee.$eventId/index.tsx",
+      "parent": "/home"
+    },
+    "/home/$productId/event-analyzer/rsvp/$eventId/": {
+      "filePath": "home/$productId/event-analyzer/rsvp.$eventId/index.tsx",
+      "parent": "/home"
     }
   }
 }

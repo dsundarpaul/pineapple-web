@@ -1,5 +1,20 @@
 import { z } from "zod"
 
+export const BasicEventFromSchema = z.object({
+  eventName: z.string().min(2).max(50),
+  eventDescription: z.string().min(2).max(500),
+  eventAgenda: z.string().min(2).max(500),
+  // eventDateTime: z.date(),
+  eventStartDateTime: z.date(),
+  eventEndDateTime: z.date(),
+  eventLocation: z.string().min(2).max(50),
+  eventVenue: z.string().min(2).max(100),
+  // eventOrganizer: z.string().min(2).max(50),
+  eventVenueCapacity: z.number().int().min(1).max(1000),
+  // eventTurnoutRatio: z.number().int().min(1).max(100),
+  // eventRSVPfilename: z.string().optional(),
+})
+
 export const CreateEditEventFormSchema = z.object({
   eventName: z.string().min(2).max(50),
   eventDescription: z.string().min(2).max(500),
